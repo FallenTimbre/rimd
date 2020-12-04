@@ -345,6 +345,12 @@ impl SMFBuilder {
     }
 }
 
+impl Default for SMFBuilder {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 #[test]
 fn simple_build() {
     let note_on = MidiMessage::note_on(69,100,0);
