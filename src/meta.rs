@@ -23,14 +23,6 @@ impl From<Error> for MetaError {
 }
 
 impl error::Error for MetaError {
-    fn description(&self) -> &str {
-        match *self {
-            MetaError::InvalidCommand(_) => "Invalid meta command",
-            MetaError::OtherErr(_) => "A general midi error has occured",
-            MetaError::Error(ref e) => e.description(),
-        }
-    }
-
     fn cause(&self) -> Option<&dyn error::Error> {
         match *self {
             MetaError::Error(ref err) => Some(err as &dyn error::Error),

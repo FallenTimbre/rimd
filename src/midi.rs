@@ -22,14 +22,6 @@ impl From<Error> for MidiError {
 }
 
 impl error::Error for MidiError {
-    fn description(&self) -> &str {
-        match *self {
-            MidiError::InvalidStatus(_) => "Midi data has invalid status byte",
-            MidiError::OtherErr(_) => "A general midi error has occured",
-            MidiError::Error(ref e) => e.description(),
-        }
-    }
-
     fn cause(&self) -> Option<&dyn error::Error> {
         match *self {
             MidiError::Error(ref err) => Some(err as &dyn error::Error),

@@ -209,15 +209,6 @@ impl From<FromUtf8Error> for SMFError {
 }
 
 impl error::Error for SMFError {
-    fn description(&self) -> &str {
-        match *self {
-            SMFError::InvalidSMFFile(_) => "The SMF file was invalid",
-            SMFError::Error(ref e)        => e.description(),
-            SMFError::MidiError(ref m)      => m.description(),
-            SMFError::MetaError(ref m)      => m.description(),
-        }
-    }
-
     fn cause(&self) -> Option<&dyn error::Error> {
         match *self {
             SMFError::MidiError(ref m) => Some(m as &dyn error::Error),
