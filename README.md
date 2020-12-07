@@ -34,14 +34,20 @@ note:
 
     let mut builder = SMFBuilder::new();
     {
+        let note = 45;
+        let velocity = 100;
+        let channel = 0;
+
         builder.add_track();
         builder.add_event(0, TrackEvent{
+            // `vtime` represents the number of "ticks" passed since the last event
             vtime: 0,
-            event: Event::Midi(MidiMessage::note_on(45, 100, 0))
+            event: Event::Midi(MidiMessage::note_on(note, velocity, channel))
         });
         builder.add_event(0, TrackEvent{
+            // `vtime` represents the number of "ticks" passed since the last event
             vtime: 0,
-            event: Event::Midi(MidiMessage::note_off(45, 100, 0))
+            event: Event::Midi(MidiMessage::note_off(note, velocity, channel))
         });
     }
 
@@ -164,14 +170,20 @@ There are also some helpers that make creating events a little cleaner:
 {
     use rimd::*;
 
+    let note = 45;
+    let velocity = 100;
+    let channel = 0;
+
     let note_on_event = TrackEvent {
+        // `vtime` represents the number of "ticks" passed since the last event
         vtime: 0,
-        event: Event::Midi(MidiMessage::note_on(45, 100, 0)),
+        event: Event::Midi(MidiMessage::note_on(note, velocity, channel)),
     };
 
     let note_off_event = TrackEvent {
+        // `vtime` represents the number of "ticks" passed since the last event
         vtime: 6,
-        event: Event::Midi(MidiMessage::note_off(45, 100, 0)),
+        event: Event::Midi(MidiMessage::note_off(note, velocity, channel)),
     },
 }
 ```
