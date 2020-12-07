@@ -31,7 +31,7 @@ Read a MIDI file:
 {
     use rimd::*
 
-    match SMF::from_file(&path) {
+    match SMF::from_file(&std::path::Path::new("some_file.mid")) {
         Ok(smf) => {
             // Process the standard MIDI file contents here.
             // See generated docs on SMF for details.
@@ -63,7 +63,7 @@ Write a MIDI file:
     };
 
     let writer = SMFWriter::from_smf(smf);
-    writer.write_to_file(&path::Path::new(path)).unwrap();
+    writer.write_to_file(&std::path::Path::new("some_file.mid")).unwrap();
 }
 ```
 
