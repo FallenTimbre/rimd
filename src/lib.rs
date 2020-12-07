@@ -1,5 +1,5 @@
-//! rimd is a set of utilities to deal with midi messages and standard
-//! midi files (SMF).  It handles both standard midi messages and the meta
+//! rimd is a set of utilities to deal with MIDI messages and standard
+//! MIDI files (SMF).  It handles both standard MIDI messages and the meta
 //! messages that are found in SMFs.
 //!
 //! rimd is fairly low level, and  messages are stored and accessed in
@@ -9,10 +9,9 @@
 //!
 //! For example usage see the bin directory.
 //!
-//! For a description of the underlying format of midi messages see:<br/>
-//! http://www.midi.org/techspecs/midimessages.php<br/>
-//! For a description of the underlying format of meta messages see:<br/>
-//! http://cs.fit.edu/~ryan/cse4051/projects/midi/midi.html#meta_event
+//! For more information on the MIDI message format, see a [description of the underlying format of
+//! MIDI messages]( http://www.midi.org/techspecs/midimessages.php) and [one for meta messages](
+//! https://web.archive.org/web/20150217154504/http://cs.fit.edu/~ryan/cse4051/projects/midi/midi.html#meta_event).
 
 extern crate byteorder;
 extern crate encoding;
