@@ -24,6 +24,36 @@ and then point your browser at /path/to/rimd/target/doc/rimd/index.html
 
 ## Example Usage
 
+### Basic Example
+
+Using the `SMFBuilder` helper, we can create a simple MIDI file that plays one
+note:
+```rust
+{
+    use rimd::*;
+
+    let mut builder = SMFBuilder::new();
+    {
+        builder.add_track();
+        builder.add_event(0, TrackEvent{
+            vtime: 0,
+            event: Event::Midi(MidiMessage::note_on(45, 100, 0))
+        });
+        builder.add_event(0, TrackEvent{
+            vtime: 0,
+            event: Event::Midi(MidiMessage::note_off(45, 100, 0))
+        });
+    }
+
+    let smf = builder.result();
+    smf.division = 96;
+
+    let writer = SMFWriter::from_smf(smf);
+    writer.write_to_file(&std::path::Path::new("some_file.mid")).unwrap();
+}
+```
+
+
 ### MIDI Files
 
 Read a MIDI file:
@@ -55,7 +85,7 @@ Write a MIDI file:
 {
     use rimd::*;
 
-    // Placeholder empty standard MIDI file.
+    // An empty SMF object
     let smf = SMF {
         format: SMFFormat::Single,
         division: 96,
@@ -69,7 +99,7 @@ Write a MIDI file:
 
 ### MIDI Data
 
-Compose a MIDI Track:
+Compose a MIDI Track with raw event literals:
 ```rust
 {
     use rimd::*;
@@ -126,6 +156,23 @@ Compose a MIDI Track:
             },
         ],
     };
+}
+```
+
+There are also some helpers that make creating events a little cleaner:
+```rust
+{
+    use rimd::*;
+
+    let note_on_event = TrackEvent {
+        vtime: 0,
+        event: Event::Midi(MidiMessage::note_on(45, 100, 0)),
+    };
+
+    let note_off_event = TrackEvent {
+        vtime: 6,
+        event: Event::Midi(MidiMessage::note_off(45, 100, 0)),
+    },
 }
 ```
 
