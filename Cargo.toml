@@ -1,6 +1,6 @@
 [package]
 name = "rimd"
-description = "Library for handling Midi and reading and writing Standard Midi Files in Rust"
+description = "Library for handling MIDI and reading and writing Standard MIDI Files in Rust"
 version = "0.0.3"
 authors = ["Nick Lanham <nick@afternight.org>", "Alex Kesling <alex@kesling.co>"]
 homepage = "https://github.com/RustAudio/rimd"
