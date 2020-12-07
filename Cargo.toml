@@ -11,7 +11,7 @@ keywords = ["midi", "smf", "music", "audio", "mid"]
 license = "MIT"
 
 [dependencies]
-byteorder = "1.3.4"
-encoding = "0.2.*"
-num-traits = "0.2.14"
-num-derive = "0.3.3"
+byteorder = "1.3"
+encoding = "0.2"
+num-traits = "0.2"
+num-derive = "0.3"
