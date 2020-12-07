@@ -42,7 +42,7 @@ impl fmt::Display for MetaError {
 }
 
 /// Commands that meta messages can represent
-#[derive(Clone, Copy, Debug, PartialEq, Eq, PartialOrd,Ord,  FromPrimitive)]
+#[derive(Clone, Copy, PartialEq, Eq, PartialOrd,Ord,  FromPrimitive)]
 pub enum MetaCommand {
     SequenceNumber = 0x00,
     TextEvent = 0x01,
@@ -61,6 +61,30 @@ pub enum MetaCommand {
     KeySignature = 0x59,
     SequencerSpecificEvent = 0x7F,
     Unknown,
+}
+
+impl fmt::Debug for MetaCommand {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        write!(f, "{}", match self {
+            MetaCommand::SequenceNumber =>              "MetaCommand::SequenceNumber",
+            MetaCommand::TextEvent =>                   "MetaCommand::TextEvent",
+            MetaCommand::CopyrightNotice =>             "MetaCommand::CopyrightNotice",
+            MetaCommand::SequenceOrTrackName =>         "MetaCommand::SequenceOrTrackName",
+            MetaCommand::InstrumentName =>              "MetaCommand::InstrumentName",
+            MetaCommand::LyricText =>                   "MetaCommand::LyricText",
+            MetaCommand::MarkerText =>                  "MetaCommand::MarkerText",
+            MetaCommand::CuePoint =>                    "MetaCommand::CuePoint",
+            MetaCommand::MIDIChannelPrefixAssignment => "MetaCommand::MIDIChannelPrefixAssignment",
+            MetaCommand::MIDIPortPrefixAssignment =>    "MetaCommand::MIDIPortPrefixAssignment",
+            MetaCommand::EndOfTrack =>                  "MetaCommand::EndOfTrack",
+            MetaCommand::TempoSetting =>                "MetaCommand::TempoSetting",
+            MetaCommand::SMPTEOffset =>                 "MetaCommand::SMPTEOffset",
+            MetaCommand::TimeSignature =>               "MetaCommand::TimeSignature",
+            MetaCommand::KeySignature =>                "MetaCommand::KeySignature",
+            MetaCommand::SequencerSpecificEvent =>      "MetaCommand::SequencerSpecificEvent",
+            MetaCommand::Unknown =>                     "MetaCommand::Unknown",
+        })
+    }
 }
 
 /// Meta event building and parsing.  See

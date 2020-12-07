@@ -67,7 +67,7 @@ mod writer;
 mod util;
 
 /// Format of the SMF
-#[derive(Debug,Clone,Copy,PartialEq)]
+#[derive(Clone,Copy,PartialEq)]
 pub enum SMFFormat {
     /// single track file format
     Single = 0,
@@ -77,6 +77,15 @@ pub enum SMFFormat {
     MultiSong = 2,
 }
 
+impl fmt::Debug for SMFFormat {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        write!(f, "{}", match self {
+            SMFFormat::Single     => "SMFFormat::Single",
+            SMFFormat::MultiTrack => "SMFFormat::MultiTrack",
+            SMFFormat::MultiSong  => "SMFFormat::MultiSong",
+        })
+    }
+}
 
 impl fmt::Display for SMFFormat {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
@@ -88,11 +97,20 @@ impl fmt::Display for SMFFormat {
     }
 }
 
-/// An event can be either a midi message or a meta event
-#[derive(Debug,Clone)]
+/// An event can be either a MIDI message or a meta event
+#[derive(Clone)]
 pub enum Event {
     Midi(MidiMessage),
     Meta(MetaEvent),
+}
+
+impl fmt::Debug for Event {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        write!(f, "{}", match self {
+            Event::Midi(event) => format!("Event::Midi({:?})", event),
+            Event::Meta(event) => format!("Event::Meta({:?})", event),
+        })
+    }
 }
 
 impl fmt::Display for Event {
@@ -148,7 +166,7 @@ impl TrackEvent {
     }
 }
 
-/// A sequence of midi/meta events
+/// A sequence of MIDI/meta events
 #[derive(Debug, Clone)]
 pub struct Track {
     /// Optional copyright notice
@@ -229,7 +247,7 @@ impl fmt::Display for SMFError {
     }
 }
 
-/// A standard midi file
+/// A standard MIDI file
 #[derive(Debug, Clone)]
 pub struct SMF {
     /// The format of the SMF
