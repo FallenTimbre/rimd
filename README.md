@@ -22,7 +22,7 @@ Most public functions have docs in the source.  To build the docs do
 
 and then point your browser at /path/to/rimd/target/doc/rimd/index.html
 
-## Examples
+## Example Usage
 
 ### MIDI Files
 
